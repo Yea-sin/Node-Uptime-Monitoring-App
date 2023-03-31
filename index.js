@@ -2,7 +2,7 @@
 
 // dependencies
 const http = require('http');
-const url = require('url');
+const {handelReqRes} = require('./helpers/handleReqRes');
 
 // app object - module sca-folding
 const app = {};
@@ -21,17 +21,8 @@ app.createServer  = () =>{
 
 };
 
-// handel request response
-app.handelReqRes = (req, res) => {
-    // handel req url and parse it
-    const parsedUrl = url.parse(req.url, true);
-    const path = parsedUrl.path.replace(/^\/|\/$/g, '');
-    const queryParamsObject = parsedUrl.query;
-    const headersObject = req.headers;
-    console.log(headersObject);
+app.handelReqRes = handelReqRes;
 
-     res.end('Server Started')
-}
 
 // start server
 app.createServer();
