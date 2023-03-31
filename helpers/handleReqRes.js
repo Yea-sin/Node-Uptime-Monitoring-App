@@ -33,17 +33,6 @@ handler.handleReqRes = (req, res) =>{
 
     const chosenHandler = routes[trimmedPath] ? routes[trimmedPath] : notFoundRouteHandler;
     
-    chosenHandler(requestedParams, (statusCode, payload)=>{
-        statusCode = typeof(statusCode) === 'number' ? statusCode : 500;
-
-        payload = typeof(payload) === 'object' ? payload : {};
-
-        const stringPayload = JSON.stringify(payload);
-
-        res.writeHead(statusCode);
-        res.end(stringPayload);
-
-    })
 
     const decoder = new StringDecoder('utf-8'); // specifying how it will decode (utf-8)
     let realData = '';
@@ -52,12 +41,22 @@ handler.handleReqRes = (req, res) =>{
         realData += decoder.write(buffer);
     })
 
-    req.on('end', (data)=>{
-        realData += decoder.end(data);
+    req.on('end', ()=>{
+        realData += decoder.end();
 
-        res.end('Server started');
+        chosenHandler(requestedParams, (statusCode, payload)=>{
+            statusCode = typeof(statusCode) === 'number' ? statusCode : 500;
+    
+            payload = typeof(payload) === 'object' ? payload : {};
+    
+            const stringPayload = JSON.stringify(payload);
+    
+            res.writeHead(statusCode);
+            res.end(stringPayload);
+    
+        })
 
-        // console.log(realData);
+        // res.end('Server started');
     })
 
 
