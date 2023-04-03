@@ -2,10 +2,17 @@
 const url = require('url');
 const {StringDecoder} = require("string_decoder");
 const routes = require('../routes');
-const {notFoundRouteHandler} = require('../handlers/routeHandlers/notFoundHandler')
+const {notFoundRouteHandler} = require('../handlers/routeHandlers/notFoundHandler');
+const lib = require('../lib/data');
 
 // module sca-folding
 const handler = {};
+// console.log(lib);
+
+// testing
+lib.update('test', 'testfile',{title: 'no value'}, (err)=>{
+    console.log(err);
+})
 
 // handel request response
 handler.handleReqRes = (req, res) =>{
