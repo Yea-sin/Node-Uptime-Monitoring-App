@@ -10,7 +10,10 @@ const handler = {};
 // console.log(lib);
 
 // testing
-lib.update('test', 'testfile',{title: 'no value'}, (err)=>{
+lib.update('test','crete', {
+    title:'update',
+    value:'updated'
+}, (err)=>{
     console.log(err);
 })
 
