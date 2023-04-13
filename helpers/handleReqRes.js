@@ -9,11 +9,13 @@ const lib = require('../lib/data');
 const handler = {};
 // console.log(lib);
 
+const data = {
+    title:'title',
+    value:'val'
+}
+
 // testing
-lib.update('test','crete', {
-    title:'update',
-    value:'updated'
-}, (err)=>{
+lib.delete('test','test1', (err)=>{
     console.log(err);
 })
 
